@@ -149,7 +149,8 @@ test-string from front
 sudo apt install nfs-common
 ```
 
-1. Подготовим манифесты для front и back (deployment). Монтируем том через persistentVolumeClaim (указываем имя pvc)
+1. Подготовим манифесты для front и back (deployment). Монтируем том через persistentVolumeClaim (указываем имя pvc)  
+
 front
 ```yaml
 apiVersion: apps/v1

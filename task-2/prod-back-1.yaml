@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: back-1
+  name: back-1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-1
+  template:
+    metadata:
+      labels:
+        app: back-1
+    spec:
+      containers:
+        - name: back
+          image: busybox
+          command: ["sleep", "3600"]
+          volumeMounts:
+            - mountPath: "/static"
+              name: prod-volume
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: prod-volume
+          persistentVolumeClaim:
+            claimName: pvc

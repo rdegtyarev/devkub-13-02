@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: stage
+  name: stage
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stage
+  template:
+    metadata:
+      labels:
+        app: stage
+    spec:
+      containers:
+        - name: front
+          image: nginx
+          volumeMounts:
+            - mountPath: "/static"
+              name: stage-volume
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+        - name: back
+          image: busybox
+          command: ["sleep", "3600"]
+          volumeMounts:
+            - mountPath: "/static"
+              name: stage-volume
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: stage-volume
+          emptyDir: {}

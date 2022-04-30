@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: front-1
+  name: front-1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-1
+  template:
+    metadata:
+      labels:
+        app: front-1
+    spec:
+      containers:
+        - name: front-1
+          image: nginx
+          volumeMounts:
+            - mountPath: "/static"
+              name: prod-volume
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: prod-volume
+          persistentVolumeClaim:
+            claimName: pvc

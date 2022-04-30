@@ -116,7 +116,7 @@ drwxr-xr-x 1 root root 4096 Apr 30 19:23 ..
 kubectl exec stage-6d6495f8f4-wj5xn -c front -- cat /static/test-file.txt
 test-string
 ``` 
-5. Изменим файле из контейнера front
+5. Изменим файл из контейнера front
 ```bash
 kubectl exec stage-6d6495f8f4-wj5xn -c front -- sh -c "echo 'test-string from front' > /static/test-file.txt"
 
@@ -128,7 +128,7 @@ test-string from front
 kubectl exec stage-6d6495f8f4-wj5xn -c back -- cat /static/test-file.txt
 test-string from front
 ```
-6. Если удалиь под, deployment создаст новый но volume будет пустой.
+6. Если удалить под, deployment создаст новый но volume будет пустой.
 ---
 
 ## Задание 2: подключить общую папку для прода
